@@ -51,28 +51,54 @@ function employeeDefine(nameIn, percent, comp, bonus){
   }
 }
 
-function employeeLoop(inputArray){
-
-for (let i = 0; i < inputArray.length; i++) {
-  const employee = inputArray[i];
+function employeeLoop(employee){
   let bonusPercentage = 0;
   if(employee.reviewRating <= 2){
     bonusPercentage = 0;
+    if (employee.employeeNumber.length <= 4) {
+      bonusPercentage += .05;
+       if ( employee.annualSalary >= 65000){
+         bonusPercentage -= .01;
+       }
+    }
   }
   else if (employee.reviewRating === 3) {
     bonusPercentage = 0.04;
+    if (employee.employeeNumber.length <= 4) {
+      bonusPercentage += .05
+      if (employee.annualSalary >= 65000) {
+        bonusPercentage -= .01;
+      }
+    }
   }
   else if (employee.reviewRating === 4) {
      bonusPercentage = 0.06;
+    if (employee.employeeNumber.length <= 4) {
+      bonusPercentage += .05
+      if (employee.annualSalary >= 65000) {
+        bonusPercentage -= .01;
+      }
+    }
   }
   else if (employee.reviewRating ===5) {
       bonusPercentage = 0.1;
+    if (employee.employeeNumber.length <= 4) {
+      bonusPercentage += .05
+      if (employee.annualSalary >= 65000) {
+        bonusPercentage -= .01;
+      }
+    }
   }
-  else{
-     
-  }
+  let compensation = (bonusPercentage + 1) * employee.annualSalary;
+let employeeObj = {
+  name: employee.name,
+  bonusPercentage: bonusPercentage,
+  totalCompensation: compensation,
+  totalBonus: compensation - employee.annualSalary,
+}
   console.log( employee , bonusPercentage );
+  console.log( employeeObj );
   }
 
-}
-employeeLoop(employees);
+employeeLoop(employees[0]);
+employeeLoop(employees[2]);
